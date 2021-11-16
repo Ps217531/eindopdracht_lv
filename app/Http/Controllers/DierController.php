@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\dierRequest;
 use App\Models\Song;
 use Illuminate\Http\Request;
 use  App\Models\dierModel;
@@ -24,7 +25,7 @@ class DierController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -33,12 +34,13 @@ class DierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(dierRequest $request)
     {
         dierModel::create($request -> except('_token'));
 
      //   return redirect()->route('dieren');
         return view('index', ['dieren'=> dierModel::all('dier', 'id', 'chipnummer')]);
+        $validated = $request->validate();
 
 
     }
@@ -51,7 +53,8 @@ class DierController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('show', ['dieren' => dierModel::find($id)]);
+
     }
 
     /**
@@ -62,7 +65,8 @@ class DierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dieren = Song::find($id);
+        return view('dieren.update', ['dieren' => $dieren]);
     }
 
     /**
@@ -72,13 +76,23 @@ class DierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(dierRequest $request, $id)
     {
-        $song = Song::find($id);
-        $song->update($request->only(['title', 'singer']));
-        return redirect()->route('songs.edit', ['id' => $id]);
+        $song = dierModel::find($id);
+        $song->update($request->only(['dier', 'chipnummer']));
+        return redirect()->route('dieren.edit', ['id' => $id]);
+        $validated = $request->validate();
+
+
     }
 
+//    public function update(dierRequest $request, $id)
+//    {
+//
+//        Fiets::find($id)->update($request->except(['_token', '_method']));
+//
+//        return redirect()->route('dieren.index');
+//    }
     /**
      * Remove the specified resource from storage.
      *
@@ -87,6 +101,12 @@ class DierController extends Controller
      */
     public function destroy($id)
     {
-        //
+//        dierModel::find($id)->delete();
+        dierModel::destroy($id);
+        //return redirect('dieren');
+//        DB::delete('delete from songs where id = ?',[$id]);
+        return redirect()->route('dieren.index');
+
+
     }
 }

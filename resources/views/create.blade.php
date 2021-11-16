@@ -34,17 +34,26 @@
     </ul>
 
 </div>
-<form action = "{{route('dieren')}}" method = "post">
+<form action = "{{route('dieren.store')}}" method = "post">
     @CSRF
 <table>
     <tr>
         <td>dier:</td>
         <td><input type='text' name='dier'/></td>
     <tr>
+        @error('dier')
+        <div>
+            {{$message}}
+        </div>
+        @enderror
         <td>Chipnummer:</td>
         <td><input type="text" name='chipnummer'/></td>
     </tr>
-
+    @error('chipnummer')
+    <div>
+        {{$message}}
+    </div>
+    @enderror
 
     <tr>
         <td colspan='2'>

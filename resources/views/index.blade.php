@@ -9,53 +9,61 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-    <body>
-        <div class="bg-gradient-to-r from-gray-400 to-gray-800 text-white text-5xl">
+<body>
+<div class="bg-gradient-to-r from-gray-400 to-gray-800 text-white text-5xl">
 
-            <ul class="flex p-4">
+    <ul class="flex p-4">
 
-                <li class="mr-6 flex-auto">
+        <li class="mr-6 flex-auto">
 
-                    <a href="#">Home</a>
+            <a href="#">Home</a>
 
-                </li>
+        </li>
 
-                <li class="mr-6 flex-auto">
+        <li class="mr-6 flex-auto">
 
-                    <a class="text-white-800 hover:text-gray-400" href="/create"> Een dier toevoegen</a>
+            <a class="text-white-800 hover:text-gray-400" href="/dieren/create"> Een dier toevoegen</a>
 
-                </li>
-                </li>
-                <li class="mr-6 flex-auto">
+        </li>
+        </li>
+        <li class="mr-6 flex-auto">
 
-                    <a class="text-white-800 hover:text-gray-400" href="/update"> Een dier wijzigen</a>
-
-
-            </ul>
-
-        </div>
+            <a class="text-white-800 hover:text-gray-400" href="/update"> Een dier wijzigen</a>
 
 
-    <div class="container">
-        <div class="gegevens">
+    </ul>
 
-{{--            <a href="{{$dieren->id}}--}}
+</div>
 
-            @foreach($dieren as $dier)
 
-                <td class="td" >dier: <br>  {{$dier->dier}} <br> Chipnummer: <br>    {{$dier->chipnummer}}   </td>
+<div class="container">
+    <div class="gegevens">
+00
 
-                <button   class="flex-shrink-0 bg-orange-500 hover:bg-green-700 border-teal-200 hover:border-teal-700 text-sm border-4 text-black py-1 px-2 rounded">Update</button>
+        {{--            <a href="/dier/delete{{ $dieren->id }}/delete"     --}}
+        @foreach($dieren as $dieren)
 
-                <button   class="flex-shrink-0 bg-red-500 hover:bg-green-700 border-teal-200 hover:border-teal-700 text-sm border-4 text-black py-1 px-2 rounded">Delete</button>
+            <a href="/dieren/{{$dieren->id}}>   <td class="td">dier: <br> {{$dieren->dier}} <br> Chipnummer: <br>  {{$dieren->chipnummer}}   </td></a>
 
+
+            <button
+                class="flex-shrink-0 bg-orange-500 hover:bg-green-700 border-teal-200 hover:border-teal-700 text-sm border-4 text-black py-1 px-2 rounded">
+               <a style="color: orange" href = '/dieren/{{ $dieren->id }}/edit'>update</a>
+            </button>
+                <form action="{{route('dieren.destroy', $dieren->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+           <input value="Delete" type="submit"  class="flex-shrink-0 bg-red-500 hover:bg-green-700 border-teal-200 hover:border-teal-700 text-sm border-4 text-black py-1 px-2 rounded">
+
+           </input>
+            </form>
             @endforeach
-        </div>
-        <img class="imgitem2" src="{{ URL('images/hondenpoot.jfif')}}">
+                </div>
+                <img class="imgitem2" src="{{ URL('images/hondenpoot.jfif')}}">
         <img class="imgitem3" src="{{ URL('images/zieligehond.jfif')}}">
 
-
     </div>
+
 
     </body>
 </html>

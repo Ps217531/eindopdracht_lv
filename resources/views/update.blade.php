@@ -34,18 +34,19 @@
     </ul>
 
 </div>
-<form action="{{ route('create', ['id' => $song->id])}}" method="POST">
+<form action="{{ route('dieren.update', ['id' => $dieren->id])}}" method="POST" >
     @csrf
     @method('PUT')
     <div>
         <p> Title:</p>
-        <input type="name" name="title" value="{{$song->title}}" placeholder="vul hier een nummer in"
-               aria-label="voeg nummer toe">
+        <input type="name" name="dier" value="{{$dieren->dier}}"   placeholder="vul hier een nummer in" aria-label="voeg nummer toe">
         <br><br>
         <p>Singer:</p>
-        <input type="text" name="singer" value="{{$song->singer}}">
-        <input type="submit"
-               class="flex-shrink-0 bg-red-500 hover:bg-green-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"/>
+        <input type="text" name="chipnummer" value="{{$dieren->chipnummer}}" >
+        <input type="submit"  class="flex-shrink-0 bg-red-500 hover:bg-green-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" />
+
+
+
     </div>
 </form>
 </body>
