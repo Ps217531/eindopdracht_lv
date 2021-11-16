@@ -13,15 +13,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [DierController::class,'index'])->name('dieren');
-Route::post('/dieren', [DierController::class,'store'])->name('dieren');
+Route::get('/', [DierController::class,'index'])->name('dieren.index');
+//show
 
-//Route::get('/', function () {
-//    return view('index');
+Route::post('/dieren', [DierController::class,'store'])->name('dieren.store');
+Route::get('/dieren/create', [DierController::class,'create'])->name('dieren.create');
+//edit
+//update
+Route::put('/dieren/{id}/edit', [DierController::class, 'update'])->Name('dieren.update');
+
+Route::delete('/dieren/{id}',[DierController::class, 'destroy'])->Name('dieren.destroy');
+//Route::get('/update', function () {
+//    return view('update');
 //});
-Route::get('/create', function () {
-    return view('create');
-});
-Route::get('/update', function () {
-    return view('update');
-});
+Route::get('/dieren/{id}', [DierController::class, 'show']);
+
